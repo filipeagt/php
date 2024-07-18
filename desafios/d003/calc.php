@@ -14,10 +14,11 @@
     <section>
         <h1>Resultado Final</h1>
         <?php 
+            $cotacao = 5.49;
             $val = $_GET["valor"];
-            $dolar = $val/5.49;
+            $dolar = $val/$cotacao;
            
-            echo "<p>Seus R$ $val equivalem a  <strong>US$ $dolar</strong></p>";
+            echo "<p>Seus R$ ".number_format($val,2,",",".")." equivalem a  <strong>US$ ".number_format($dolar,2,",",".")."</strong></p>";
             echo "<p><strong>*Cotação fixa de R$5,49</strong> informada diretamente no código.</p>";
             
         ?>
