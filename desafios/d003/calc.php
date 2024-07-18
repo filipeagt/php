@@ -17,8 +17,10 @@
             $cotacao = 5.49;
             $val = $_GET["valor"];
             $dolar = $val/$cotacao;
+            $padrao = numfmt_create("pt_BR",NumberFormatter::CURRENCY);
            
-            echo "<p>Seus R$ ".number_format($val,2,",",".")." equivalem a  <strong>US$ ".number_format($dolar,2,",",".")."</strong></p>";
+            //echo "<p>Seus R$ ".number_format($val,2,",",".")." equivalem a  <strong>US$ ".number_format($dolar,2,",",".")."</strong></p>";
+            echo "<p>Seus ".numfmt_format_currency($padrao,$val,"BRL")." equivalem a  <strong>".numfmt_format_currency($padrao,$dolar,"USD")."</strong></p>";
             echo "<p><strong>*Cotação fixa de R$5,49</strong> informada diretamente no código.</p>";
             
         ?>
