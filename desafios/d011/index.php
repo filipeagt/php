@@ -8,8 +8,8 @@
 </head>
 <body>
     <?php 
-        $preco = isset($_POST["preco"])?$_POST['preco']:0;
-        $percentual = isset($_POST["reajuste"])?$_POST["reajuste"]:0;
+        $preco = isset($_POST["preco"])?$_POST['preco']:'0';
+        $percentual = isset($_POST["reajuste"])?$_POST["reajuste"]:'0';
         $reajuste = $preco*$percentual/100;
         $novoPreco = $preco + $reajuste;
     ?>    
@@ -17,9 +17,9 @@
         <h1>Reajustador de Preços</h1>
         <form action="<?=$_SERVER["PHP_SELF"]?>" method="post">
             <label for="preco">Preço do Produto (R$)</label>
-            <input type="number" name="preco" id="preco" step="0.01" value="<?=$preco?>">
-            <label for="reajuste">Qual será o percentual do reajuste? (<strong id="saida">0%</strong>)</label>
-            <input type="range" name="reajuste" id="reajuste" oninput="atualiza()" value="0">
+            <input type="number" name="preco" id="preco" step="0.01" value="<?=$preco?>" min="0.10">
+            <label for="reajuste">Qual será o percentual do reajuste? (<strong id="saida"><?=$percentual?>%</strong>)</label>
+            <input type="range" name="reajuste" id="reajuste" oninput="atualiza()" value="<?=$percentual?>">
             <input type="submit" value="Reajustar">
         </form>
     </main>
