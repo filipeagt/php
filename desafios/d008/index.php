@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php 
-        $num = isset($_GET["num"])?$_GET["num"]:0;
+        $num = isset($_GET["num"])?$_GET["num"]:1;
         $rq = sqrt($num);
         $rc = pow($num,(1/3));
     ?>
