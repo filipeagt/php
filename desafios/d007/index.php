@@ -8,9 +8,9 @@
 </head>
 <body>
     <?php 
-        $minimo = 1400;
-        $salario = $_GET["sal"]??$minimo;
-        $nsalarios = floor($salario/$minimo);
+        $minimo = 1412;
+        $salario = isset($_GET["sal"])?$_GET["sal"]:$minimo;//??$minimo;
+        $nsalarios = (int)($salario/$minimo);
         $resto = $salario%$minimo;
         $padrao = numfmt_create("pt_BR", NumberFormatter::CURRENCY);
         
@@ -18,8 +18,8 @@
     <main>
         <h1>Informe seu salário</h1>
         <form action="<?=$_SERVER["PHP_SELF"]?>" method="get">
-            <label for="salario">Salário (R$)</label>
-            <input type="number" name="sal" id="idsal" value="1400" step="0.01" min="<?=$minimo?>">
+            <label for="sal">Salário (R$)</label>
+            <input type="number" name="sal" id="idsal" value="<?=$salario?>" min="0">
             <p>Considerando um salário mínimo de <strong><?=numfmt_format_currency($padrao,$minimo,'BRL')?></strong></p>
             <input type="submit" value="Calcular">
         </form>
