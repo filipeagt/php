@@ -226,8 +226,9 @@ input[type=radio] + label, input[type=checkbox] + label {
     background-color: rgba(0, 0, 0, 0);
 }
 
-img {
-    height: 70px;
+img.nota {
+    height: 60px;
+    margin: 5px;
 }
 
 h1 {
