@@ -17,7 +17,23 @@ if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['senha']) &&
         //Instanciar a classe usuario
         $usuario =  new Usuario($nome, $email, $senha);
 
-        
+        //Setar a repetição de senha
+        $usuario->set_repeticao($repete_senha);
+
+        //Valiadar o cadastro
+        $usuario->validar_cadastro();
+
+        //Se naõ tiver nenhum erro
+        if (empty($usuario->erro)) {
+            //Inserir
+            if ($usuario->insert()) {
+                header('location: index.php');
+            } else {
+                //Deu errado
+                $erro_geral = $usuario->erro["erro_geral"];
+            }
+        } 
+
     }
 
 }
