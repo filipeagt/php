@@ -24,22 +24,22 @@ class Usuario extends Crud {
 
         //Validação do nome
         if (!preg_match("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\s]+$/",$this->nome)) {
-            $this->erro["erro_nome"] = "Por favor informe um nome válido";
+            $this->erro["erro_nome"] = "Por favor informe um nome válido!";
         }
 
         //Verificar se email é válido
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $this->erro["erro_email"] = "Formato de e-mail inválido";
+            $this->erro["erro_email"] = "Formato de e-mail inválido!";
         }
 
         //Verificar se senha tem mais de seis dígitos
         if (strlen($this->senha) < 6) {
-            $this->erro["erro_senha"] = "Senha deve ter seis caracteres ou mais";
+            $this->erro["erro_senha"] = "Senha deve ter seis caracteres ou mais!";
         }
 
         //Verificar repetição da senha
         if ($this->senha !== $this->repete_senha) {
-            $this->erro["erro_repete"] = "Senha e repetição de senha diferentes";
+            $this->erro["erro_repete"] = "Senha e repetição de senha diferentes!";
         }
 
     }
@@ -62,6 +62,10 @@ class Usuario extends Crud {
         }
     }   
 
-    public function update($id) {}
+    public function update($id) {
+        $sql = "UPDATE $this->tabela SET token=? WHERE id=?";
+        $sql = DB::prepare($sql);
+        return $sql->execute(array(123, $id));
+    }
 }
 ?>
