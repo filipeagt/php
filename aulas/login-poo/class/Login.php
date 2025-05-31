@@ -29,11 +29,31 @@ class Login{
             if($sql->execute(array($this->token, $email, $senha_cripto))) {
                 //Colocar o token na sessão
                 $_SESSION["TOKEN"] = $this->token;
+                //Redirecionamos nosso usuário para a área restrita
+                header('location: restrita/index.php');
+            } else {
+                $this->erro["erro_geral"] = "Falha ao se comunicar com o servidor!";
             }
 
         } else {
             $this->erro["erro_geral"] = "Usuário ou senha incorretos!";
         }
     }
+
+    public function isAuth($token) {
+
+        $sql = "SELECT * FROM $this->tabela WHERE token=? LIMIT 1";
+        $sql = DB::prepare($sql);
+        $sql->execute(array($token));
+        $usuario = $sql->fetch(PDO::FETCH_ASSOC);
+
+        if ($usuario) {
+            $this->nome = $usuario["nome"];
+            $this->email = $usuario["email"];
+        } else {
+            header('location: ../index.php');
+        }
+    }
+    
 }
 ?>
